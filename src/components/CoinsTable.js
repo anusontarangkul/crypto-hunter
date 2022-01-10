@@ -15,7 +15,7 @@ const CoinsTable = () => {
     const [page, setPage] = useState(1)
     const { currency, symbol } = CryptoState()
 
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
     const fetchCoins = async () => {
         setLoading(true)
@@ -61,6 +61,8 @@ const CoinsTable = () => {
         }
     }))
     const classes = useStyles()
+
+    // if (!coins) return <LinearProgress style={{ backgroundColor: 'gold' }} />
     return (
         <ThemeProvider theme={darkTheme}>
             <Container style={{ textAlign: 'center' }}>
