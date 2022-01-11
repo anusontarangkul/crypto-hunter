@@ -62,7 +62,6 @@ const CoinsTable = () => {
     }))
     const classes = useStyles()
 
-    // if (!coins) return <LinearProgress style={{ backgroundColor: 'gold' }} />
     return (
         <ThemeProvider theme={darkTheme}>
             <Container style={{ textAlign: 'center' }}>
