@@ -83,7 +83,6 @@ const CoinPage = () => {
                 { coins: watchlist ? [...watchlist, coin?.id] : [coin?.id] },
                 { merge: true }
             );
-
             setAlert({
                 open: true,
                 message: `${coin.name} Added to the Watchlist !`,

@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Crypto Hunter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An app where you can search crypto and add certain crypto to your own personal watchlist.
 
-## Available Scripts
+|                                         |                                         |                                                   |
+| :-------------------------------------: | :-------------------------------------: | :-----------------------------------------------: |
+|     [Introduction](#crypto-hunter)      | [Table of Contents](#table-of-contents) | [Development Highlights](#development-highlights) |
+|      [Installation](#Installation)      |    [Page Directory](#page-directory)    |       [Code Hightlights](#code-highlights)        |
+| [Technologies Used](#Technologies-Used) |           [Credits](#Credits)           |                [License](#License)                |
 
-In the project directory, you can run:
+## Development Highlights
 
-### `yarn start`
+- Use React Context to store global state used in different components
+- Axios Get crypto endpoints
+- Login and Google login through firebase
+- Save Watchlist using Firestore
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+npm i
+```
 
-### `yarn test`
+## Page Directory
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This app is seperated into components, pages, and configuration.
 
-### `yarn build`
+## Code Highlights
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Used useEffect to check if the user is logged in.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```JavaScript
+    useEffect(() => {
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                setUser(user);
+            }
+            else setUser(null)
+        })
+    }, [])
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Add a crypto to watch list.
 
-### `yarn eject`
+```JavaScript
+    const addToWatchlist = async () => {
+        const coinRef = doc(db, "watchlist", user.uid);
+        try {
+            await setDoc(
+                coinRef,
+                { coins: watchlist ? [...watchlist, coin?.id] : [coin?.id] },
+                { merge: true }
+            );
+            setAlert({
+                open: true,
+                message: `${coin.name} Added to the Watchlist !`,
+                type: "success",
+            });
+        } catch (error) {
+            setAlert({
+                open: true,
+                message: error.message,
+                type: "error",
+            });
+        }
+    };
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technologies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [react](https://reactjs.org/)
+- [firebase](https://firebase.google.com/)
+- [mui](https://mui.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Credits
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project followed the tutorial by [Roadside Coder](https://www.youtube.com/watch?v=QA6oTpMZp84)
 
-## Learn More
+|                           |                                                                                                                                                                                                       |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **David Anusontarangkul** | [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/anusontarangkul/) [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/anusontarangkul) |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
