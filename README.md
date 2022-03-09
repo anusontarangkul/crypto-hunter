@@ -2,6 +2,8 @@
 
 An app where you can search crypto and add certain crypto to your own personal watchlist.
 
+![screenshot](screenshot.png)
+
 |                                         |                                         |                                                   |
 | :-------------------------------------: | :-------------------------------------: | :-----------------------------------------------: |
 |     [Introduction](#crypto-hunter)      | [Table of Contents](#table-of-contents) | [Development Highlights](#development-highlights) |
